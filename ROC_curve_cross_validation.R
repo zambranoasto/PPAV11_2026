@@ -13,11 +13,8 @@ library(RColorBrewer)
 # Load data
 data <- read.csv("C:/Users/Username/OneDrive/Name.csv",
                  header = TRUE, stringsAsFactors = FALSE)
-
 colnames(data) <- trimws(colnames(data))
 data$Group <- factor(data$Group)
-
-# Define class labels (positive class = Case)
 levels(data$Group) <- c("Control", "Case")
 
 # Biomarker signatures
