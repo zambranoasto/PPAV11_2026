@@ -1,6 +1,8 @@
-# Hazard models of CSF proteomic biomarker signatures
+# Prognosis analysis of CSF proteomic biomarker signatures
+# Hazard models
 
-# All signatures comparation
+# All signatures comparison
+
 # Required libraries
 library(survival)
 library(dplyr)
@@ -90,7 +92,8 @@ ggplot(clinical_results, aes(x = signature, y = HR_risk_group_vs_reference, colo
   geom_text(aes(label = paste0("p=", signif(p_value, 3))), hjust = -0.2, size = 4)
 
 
-# One signature kaplan meier
+# One signature Kaplan-Meier
+                                  
 # Required libraries
 library(survival)
 library(survminer)
