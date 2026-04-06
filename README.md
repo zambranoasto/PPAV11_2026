@@ -15,7 +15,7 @@ The code was tested on R (v4.3.0) on a Windows system
 5. Functional enrichment and pathway analysis
 
 # Data
-The proteomics data used in this study are available at 
+The proteomics data used in this study are available at:  
 1. ADNI: https://adni.loni.usc.edu 
 2. Bader et al. (2020): Supplemental Information https://doi.org/10.15252/msb.20199356 
 3. Bangs et al. (2025): https://www.synapse.org/Synapse:syn65461849
