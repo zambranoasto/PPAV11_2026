@@ -13,11 +13,10 @@ Expression proteomics matrix
 - CSV includes RID and protein values of PPAV11 and core biomarkers per subject 
 
 Clinical data
-Original file: "ADNIMERGE_21Apr2025" obtained from the ADNI database. 
 
-For analysis, only A+T+ individuals (defined using the Aβ/pTau ratio) were selected (n = 408), and clinical variables of interest
-
-CSV includes: RID,	Age,	Sex,	PTEDUCAT,	FDG,	PIB,	AV45,	APOE4,	ABETA,	TAU,	PTAU,	pTau/AB,	CDRSB,	ADAS11,	ADAS13,	ADASQ4,	MMSE,	RAVLT_immediate,	RAVLT_learning,	RAVLT_forgetting,	RAVLT_perc_forgetting,	LDELTOTAL,	DIGITSCOR,	TRABSCOR,	FAQ,	MOCA,	EcogPtMem,	EcogPtLang,	EcogPtVisspat,	EcogPtPlan,	EcogPtOrgan,	EcogPtDivatt,	EcogPtTotal,	EcogSPMem,	EcogSPLang,	EcogSPVisspat,	EcogSPPlan,	EcogSPOrgan,	EcogSPDivatt,	EcogSPTotal, Ventricles,	Hippocampus,	WholeBrain,	Entorhinal,	Fusiform,	MidTemp,	ICV
+- Original file: "ADNIMERGE_21Apr2025" obtained from the ADNI database. 
+- For analysis, only A+T+ individuals (defined using the Aβ/pTau ratio) were selected (n = 408), and clinical variables of interest
+- CSV includes: RID,	Age,	Sex,	PTEDUCAT,	FDG,	PIB,	AV45,	APOE4,	ABETA,	TAU,	PTAU,	pTau/AB,	CDRSB,	ADAS11,	ADAS13,	ADASQ4,	MMSE,	RAVLT_immediate,	RAVLT_learning,	RAVLT_forgetting,	RAVLT_perc_forgetting,	LDELTOTAL,	DIGITSCOR,	TRABSCOR,	FAQ,	MOCA,	EcogPtMem,	EcogPtLang,	EcogPtVisspat,	EcogPtPlan,	EcogPtOrgan,	EcogPtDivatt,	EcogPtTotal,	EcogSPMem,	EcogSPLang,	EcogSPVisspat,	EcogSPPlan,	EcogSPOrgan,	EcogSPDivatt,	EcogSPTotal, Ventricles,	Hippocampus,	WholeBrain,	Entorhinal,	Fusiform,	MidTemp,	ICV
 
 # ROC curve cross-validation
 
