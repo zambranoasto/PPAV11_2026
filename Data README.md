@@ -22,13 +22,13 @@ Clinical data:
 Analysis on ADNI database:
 - Original file: "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from the ADNI database.
 - Processing: protein abundance log2 transformation, inclusion of protein names, and diagnosis per subject.
-- Stratification: Different stratifications were used for ROC performance. Based on biological diagnosis (1) A-T- vs A+T+ (based on Aβ/pTau ratio; n =703), (2) A-T- vs A+T- (based on AB42, n = 388), (3) AV45- vs AV45+ (n = 488); biological (based on Aβ/pTau ratio) and clinical (stablished by ADNi based on clinical assessment) diagnosis (4) A-T- CU vs A+T+ MCI (n = 350), (5) A-T- CU vs A+T+ dementia (n = 265); and differential diagnosis (6) A-T- CU vs A-T- MCI (n = 276).
+- Stratification: Different stratifications were used for ROC performance. Based on biological diagnosis (1) A-T- vs A+T+ (based on Aβ/pTau ratio; n =703), (2) A-T- vs A+T- (based on AB42, n = 388), (3) AV45- vs AV45+ (n = 488); biological (based on Aβ/pTau ratio) and clinical (stablished by ADNI based on clinical assessment) diagnosis (4) A-T- CU vs A+T+ MCI (n = 350), (5) A-T- CU vs A+T+ dementia (n = 265); and differential diagnosis (6) A-T- CU vs A-T- MCI (n = 276).
 - Input CSVs include: RID, group (0-control or 1-group of interest), and protein log2 abundance values per subject.
 
 Analysis on PPMI database:
 - Original file: "ppmi_project_151.xlm" obtained from the PPMI database.
 - Processing: Conversion for protein names into official gene names. 
-- Stratification: Subjects with PD were those classified as sporadic PD and LRRK2, control subjects were the ones classified as Healthy Controls.
+- Stratification: Subjects with PD were those classified with sporadic PD and LRRK2; control subjects were the ones classified as Healthy Controls.
 - Input CSV includes: RID, group (0-control or 1-PD), and protein log2 abundance values per subject.
 
 # ROC curve independent training testing
