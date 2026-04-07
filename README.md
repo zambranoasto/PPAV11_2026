@@ -5,8 +5,6 @@ The repository contains the code for bioinformatic analysis used in the paper "A
 
 This study aimed to identify a reproducible protein biomarker signature using publicly available CSF proteomic datasets and to perform a head-to-head comparison of our signature against published proteomic panels to rigorously assess the stability of their diagnostic and prognostic performance across independent cohorts.
 
-The code was tested on R (v4.3.0) on a Windows system
-
 ## Content
 1. ROC curve analysis for diagnosis: cross-validation model for SomaScan-derived data
 2. ROC curve analysis for diagnosis: independent training and testing for LC-MS/MS-derived data
