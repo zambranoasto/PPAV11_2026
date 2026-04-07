@@ -1,4 +1,4 @@
-# Prognosis_analysis
+# Prognosis analysis
 Input file dat: "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from the ADNI database.
 After downloading the dataset and prior to analysis, the data were split into two separate CSV files to evaluate disease-stage transitions. 
 One dataset included cognitively unimpaired (CU) individuals with longitudinal follow-up to analyze the transition from CU to MCI (n = 143). 
@@ -19,6 +19,6 @@ EcogPtLang,	EcogPtVisspat,	EcogPtPlan,	EcogPtOrgan,	EcogPtDivatt,	EcogPtTotal,	E
 EcogSPOrgan,	EcogSPDivatt,	EcogSPTotal,	FLDSTRENG,	FSVERSION,	IMAGEUID,	Ventricles,	Hippocampus,	WholeBrain,	Entorhinal,	Fusiform,	
 MidTemp,	ICV
 
-# ROC_curve_cross_validation
+# ROC curve cross-validation
 
-# ROC_curve_independent_training_testing
+# ROC curve independent training testing
