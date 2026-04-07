@@ -23,6 +23,14 @@ The proteomics data used in this study are available at:
 5. PPMI: https://www.ppmi-info.org/ 
 6. Tao et al. (2024): Supplemental Information https://doi.org/10.1016/j.xinn.2023.100544 
 
+## Instructions
+The code was tested using R (v4.3.0) on Windows, but it should be compatible with later versions of R and other operating systems. 
 
+Before running the scripts, the working directory containing the input data must be specified at the beginning of each R script. Input datasets links and preprocessing steps are described in data/README.md.
 
+The scripts can be run independently, but are intended to be executed in the following order:
+ROC_curve_cross_validation.R
+ROC_curve_independent_training_testing.R
+Prognosis_analysis.R
+Enrichment_analysis.R
  
