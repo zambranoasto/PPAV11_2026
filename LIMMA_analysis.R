@@ -1,4 +1,5 @@
 # Limma correlation analysis, proteins abundance adjusted by age and sex
+# Data for input is described in Data README.md
 
 # Load packages
 library(tidyverse)
@@ -8,9 +9,9 @@ library(viridis)
 library(dplyr)
 
 # Load data
-expr_matrix <- read.csv("C:\\Users\\Username\\OneDrive\\Name.csv", 
+expr_matrix <- read.csv("Path/to/file.csv", 
                         row.names = 1, check.names = FALSE)
-clinical_data <- read.csv("C:\\Users\\Username\\OneDrive\\Name.csv",
+clinical_data <- read.csv("Path/to/file.csv",
                           stringsAsFactors = FALSE)
 
 # Align subjects between both files
