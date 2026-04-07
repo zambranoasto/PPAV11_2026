@@ -7,11 +7,10 @@ CSVs include: RID, time_followup, status, age, sex, and signature values. Values
 
 # LIMMA analysis
 Expression proteomics matrix
-Original file: "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from the ADNI database.
 
-For analysis, only A+T+ individuals (defined using the Aβ/pTau ratio) were selected (n = 408)
-
-CSV includes RID and protein values of PPAV11 and core biomarkers per subject 
+- Original file: "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from the ADNI database.
+- For analysis, only A+T+ individuals (defined using the Aβ/pTau ratio) were selected (n = 408)
+- CSV includes RID and protein values of PPAV11 and core biomarkers per subject 
 
 Clinical data
 Original file: "ADNIMERGE_21Apr2025" obtained from the ADNI database. 
