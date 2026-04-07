@@ -1,8 +1,7 @@
-# Prognosis analysis of CSF proteomic biomarker signatures
-# Hazard models
+# Prognosis analysis of CSF proteomic biomarker signatures (Hazard models)
+# Data for input is described in Data README.md
 
 # All signatures comparison
-
 # Required libraries
 library(survival)
 library(dplyr)
@@ -23,7 +22,7 @@ risk_logic <- tibble(
 )
 
 # Load data
-dat <- read_csv("C:/Users/Usernam/OneDrive/Name.csv")
+dat <- read_csv("Path/to/file.csv") 
 dat <- dat %>%
   mutate(sex = factor(sex, levels = c("Female", "Male")))
 
@@ -92,8 +91,7 @@ ggplot(clinical_results, aes(x = signature, y = HR_risk_group_vs_reference, colo
   geom_text(aes(label = paste0("p=", signif(p_value, 3))), hjust = -0.2, size = 4)
 
 
-# One signature Kaplan-Meier
-                                  
+# One signature Kaplan-Meier                              
 # Required libraries
 library(survival)
 library(survminer)
