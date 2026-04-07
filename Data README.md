@@ -45,7 +45,7 @@
 - **Original file:** "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
 - **Processing:** Protein abundance log₂ transformation, inclusion of protein names, and subject diagnosis.
 - **Stratification:** After downloading the dataset and prior to analysis, the data were split into two separate CSV files to evaluate disease-stage transitions. (1) One dataset included cognitively unimpaired (CU) individuals with longitudinal follow-up to analyze the transition from CU to MCI (n = 143). (2) The second dataset included A+T+ individuals (defined using the Aβ/pTau ratio) with baseline MCI and longitudinal follow-up to evaluate the transition from MCI to dementia (n = 174). 
-- **Input CSVs include:** RID, time_followup, status, age, sex, and signature values.  Signature values were derived using `ROC_curve_cross_validation.R` based on CU vs A+T+ MCI (n = 350) and A+T+ MCI vs A+T+ dementia (n = 265) datasets.
+- **Input CSVs include:** RID, time_followup, status, age, sex, and signature values.  Signature values were derived using `ROC_curve_cross_validation.R` based on CU vs A+T+ MCI (n = 350) and A+T+ MCI vs A+T+ dementia (n = 357) datasets.
 
 # LIMMA analysis
 
