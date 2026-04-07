@@ -27,8 +27,8 @@ The code was tested using R (v4.3.0) on Windows, but it should be compatible wit
 Before running the scripts, the working directory containing the input data must be specified at the beginning of each R script. Input datasets links and preprocessing steps are described in data/README.md.
 
 The scripts can be run independently, but are intended to be executed in the following order:
-ROC_curve_cross_validation.R
-ROC_curve_independent_training_testing.R
-Prognosis_analysis.R
-Enrichment_analysis.R
+1. ROC_curve_cross_validation.R
+2. ROC_curve_independent_training_testing.R
+3. Prognosis_analysis.R
+4. Enrichment_analysis.R
  
