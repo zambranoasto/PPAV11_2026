@@ -1,7 +1,92 @@
 # Prognosis analysis of CSF proteomic biomarker signatures (Hazard models)
 # Data for input is described in Data README.md
 
-# All signatures comparison
+# Acquisiton of signatures scores 
+# Required libraries
+library(pROC)
+library(caret)
+library(dplyr)
+library(tibble)
+library(purrr)
+library(readr)
+
+# Load and prepare data
+data <- read_csv("Path/to/file.csv",
+                 col_types = cols())
+colnames(data) <- trimws(colnames(data))
+data$Group <- factor(data$Group)
+levels(data$Group) <- c("0", "1")  # Positive level = "Case"
+
+# Define signatures
+signatures <- list(
+  Bader = c("MAPT", "PKM", "YWHAZ", "ALDOC", "IMPA1"),
+  Wang = c("SMOC1", "MAPT", "GFAP", "SUCLG2", "PRDX3", "NTN1"),
+  PPAV11 = c("CHI3L1", "CYCS", "DDAH1", "GDA", "LRRC4B", "NPTX2", "PKM", "SMOC1", "SPON1", "YWHAG", "YWHAZ"),
+  Sathe = c("NPTX2", "PKM", "YWHAG"),
+  Tao = c("PLTP", "C16orf89", "CHRD", "FRZB", "MGP", "ART3", "COL18A1", "PCDHGC5", "CXCL16", "B3GALNT1", "SHBG", "SCRG1", "MGAT2", "GALNT7", "MAN2A2", "GM2A", "IGHM", "MAN1C1", "PCSK1N"),
+  Shen = c("NPTX2", "SMOC1", "GFAP", "SMOC2", "PEA15", "TNFRSF1B"),
+  Ali = c("TMOD2", "SMOC1", "YWHAG", "TMED2", "LRRN1", "HHIP", "CD248", "PPP3R1", "PPP1R1A", "MIF"),
+  VZ = c("ALDOA", "PKM", "LDHB"),
+  Liu = c("AT1B1", "SRGN", "PRDX3"),
+  Campo = c("MMP10", "ABL1", "SDC4", "ITGB2", "CLEC5A", "TREM1", "SPON2", "THBD"),
+  Guo1 = c("ACHE", "YWHAG", "PCSK1", "MMP10", "IRF1"),
+  Guo2 = c("YWHAG", "SMOC1", "PIGR", "TMOD2"),
+  Hou = c("YWHAZ", "LDHA", "PKM", "CHI3L1", "BASP1", "SMOC1", "ENO2", "PRDX1", "VSTM2A", "F2", "SOD1", "FN1"),
+  Yun  = c("YWHAZ", "EPHA5", "CABIN1", "SST", "PPIA", "CNTN5", "GFAP", "POMC", "RSPO1", "TPT1", "MINDY2", "PRDX6")
+)
+
+# Function to calculate scores 
+calculate_scores_per_subject <- function(signature_data, k = 5, rep = 10) {
+  scores <- list()
+  set.seed(123)
+  for (i in 1:rep) {
+    folds <- createFolds(signature_data$Group, k = k, list = TRUE)
+    for (j in 1:k) {
+      test_idx <- folds[[j]]
+      train <- signature_data[-test_idx, ]
+      test <- signature_data[test_idx, ]
+      
+      if (length(unique(test$Group)) < 2) next
+      model <- tryCatch(glm(Group ~ ., data = train, family = "binomial"), error = function(e) NULL)
+      if (is.null(model)) next
+      probs_control <- predict(model, newdata = test, type = "response")
+      probs <- 1 - probs_control  # Probability of "Case"
+      scores[[length(scores) + 1]] <- tibble(
+        RID = test$RID,
+        Group = test$Group,
+        Probability = probs
+      )
+    }
+  }
+  bind_rows(scores)
+}
+
+signature_results <- list()
+
+for (signature_name in names(signatures)) {
+  genes <- intersect(signatures[[signature_name]], colnames(data))
+  
+  if (length(genes) == 0) {
+    message("Signature ", signature_name, " has no genes in the dataset.")
+    next
+  }
+  signature_data <- data %>%
+    select(RID, Group, all_of(genes)) %>%
+    na.omit()
+  test_predictions <- calculate_scores_per_subject(signature_data)
+  average_score <- test_predictions %>%
+    group_by(RID, Group) %>%
+    summarise(!!paste0("score_", signature_name) := mean(Probability), .groups = "drop")
+  signature_results[[signature_name]] <- average_score
+}
+
+# Combine  scores into a single dataframe
+final_scores <- reduce(signature_results, full_join, by = c("RID", "Group"))
+
+# Save to CSV
+write_csv(final_scores, "output.csv")
+
+# Prognosis analysis, all signatures comparison
 # Required libraries
 library(survival)
 library(dplyr)
@@ -18,11 +103,11 @@ signatures <- c("score_PPAV11", "score_Bader", "score_Wang", "score_Sathe",
 risk_logic <- tibble(
   signature = signatures,
   clinical_risk = c("Low", "Low", "Low", "Low", "Low", "Low", "Low", "Low", "Low", "Low",
-                    "Low", "Low", "Low", "Low", "High", "High", "Low", "High", "High")  # ABETA corrected to "Low"
+                    "Low", "Low", "Low", "Low", "High", "High", "Low", "High", "High")
 )
 
 # Load data
-dat <- read_csv("Path/to/file.csv") 
+dat <- read_csv("Path/to/file.csv") # Use the output csv from last step 
 dat <- dat %>%
   mutate(sex = factor(sex, levels = c("Female", "Male")))
 
@@ -91,7 +176,7 @@ ggplot(clinical_results, aes(x = signature, y = HR_risk_group_vs_reference, colo
   geom_text(aes(label = paste0("p=", signif(p_value, 3))), hjust = -0.2, size = 4)
 
 
-# One signature Kaplan-Meier                              
+# Prognosis analysis, one signature (Kaplan-Meier)                              
 # Required libraries
 library(survival)
 library(survminer)
@@ -99,7 +184,7 @@ library(dplyr)
 library(readr)
 
 # Load data
-dat <- read_csv("C:/Users/Username/OneDrive/Name.csv")
+dat <- read_csv("Path/to/file.csv")
 
 # Transformations 
 dat <- dat %>%
