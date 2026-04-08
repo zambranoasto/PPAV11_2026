@@ -20,6 +20,8 @@ expr_matrix <- expr_matrix[, common_ids]
 clinical_data <- clinical_data %>%
   filter(RID %in% common_ids) %>%
   arrange(match(RID, common_ids))
+# To scale abundance values for direct comparison across proteins, add the following line:
+# expr_mat_scaled <- t(scale(t(expr_mat))
 original_protein_order <- rownames(expr_matrix)
 
 # Define clinical variables to analyze
@@ -82,7 +84,7 @@ label_matrix <- all_results %>%
 beta_matrix <- beta_matrix[original_protein_order, , drop = FALSE]
 label_matrix <- label_matrix[original_protein_order, , drop = FALSE]
 
-# 1Define colors and breaks for heatmap
+# Define colors and breaks for heatmap
 max_abs_beta <- max(abs(beta_matrix), na.rm = TRUE)
 breaks <- seq(-max_abs_beta, max_abs_beta, length.out = 101)
 colors <- rev(viridis(100, option = "D"))
