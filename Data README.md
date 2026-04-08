@@ -3,7 +3,7 @@
 ### Analysis on ADNI database
 - **Original file:** "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
 - **Processing:** Protein abundance log₂ transformation, inclusion of protein names, and subject diagnosis.
-- **Stratification:** Different stratifications were used to evaluate ROC performance: Different stratifications were used for ROC performance. Based on biological diagnosis (1) A-T- vs A+T+ (based on Aβ/pTau ratio; n = 703), (2) A-T- vs A+T- (based on AB42, n = 388), (3) AV45- vs AV45+ (n = 488); biological (based on Aβ/pTau ratio) and clinical (stablished by ADNI based on clinical assessment) diagnosis (4) A-T- CU vs A+T+ MCI (n = 350), (5) A-T- CU vs A+T+ dementia (n = 265); and differential diagnosis (6) A-T- CU vs A-T- MCI (n = 276).
+- **Stratification:** Different stratifications were used for ROC performance. Based on biological diagnosis (1) A-T- vs A+T+ (based on Aβ/pTau ratio; n = 703), (2) A-T- vs A+T- (based on AB42, n = 388), (3) AV45- vs AV45+ (n = 488); biological (based on Aβ/pTau ratio) and clinical (stablished by ADNI based on clinical assessment) diagnosis (4) A-T- CU vs A+T+ MCI (n = 350), (5) A-T- CU vs A+T+ dementia (n = 265); and differential diagnosis (6) A-T- CU vs A-T- MCI (n = 276).
 - **Input CSVs include:** RID, diagnosis (0 = control, 1 = group of interest), and protein log₂ abundance values per subject.
 
 ### Analysis on PPMI database
@@ -41,11 +41,17 @@
 
 
 # Prognosis analysis
-
+### Acquistion of signature scores 
 - **Original file:** "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
 - **Processing:** Protein abundance log₂ transformation, inclusion of protein names, and subject diagnosis.
-- **Stratification:** After downloading the dataset and prior to analysis, the data were split into two separate CSV files to evaluate disease-stage transitions. (1) One dataset included cognitively unimpaired (CU) individuals with longitudinal follow-up to analyze the transition from CU to MCI (n = 143). (2) The second dataset included A+T+ individuals (defined using the Aβ/pTau ratio) with baseline MCI and longitudinal follow-up to evaluate the transition from MCI to dementia (n = 174). 
-- **Input CSVs include:** RID, time_followup, status, age, sex, and signature values.  Signature values were derived using `ROC_curve_cross_validation.R` based on CU vs A+T+ MCI (n = 350) and A+T+ MCI vs A+T+ dementia (n = 357) datasets.
+- **Stratification:** Prior to analysis, the data were split into two separate CSV files (1) A-T- CU vs A+T+ MCI (n = 350), and (2) A+T+ MCI vs A+T+ dementia (n = 413). 
+- **Input CSV includes:** RID, group (0 = control, 1 = PD), and protein log₂ abundance values per subject.
+
+### Prognosis analysis
+- **Input files:** Output files obtained from "Acquistion of signature scores"
+- **Processing:** Inclusion of clinical data (age, sex, diagnosis, time of visit and change in diagnosis) from "ADNIMERGE_21Apr2025". 
+- **Stratification:** Only participants with longitudinal follow-up were included in the analysis. (1) CU individuals to analyze the transition from CU to MCI (n = 143), and (2) A+T+ individuals (defined using the Aβ/pTau ratio) with baseline MCI to evaluate the transition from MCI to dementia (n = 174). 
+- **Input CSVs include:** RID, time_followup, status, age, sex, and signature scores.
 
 # LIMMA analysis
 
