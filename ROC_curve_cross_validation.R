@@ -11,8 +11,8 @@ library(tibble)
 library(purrr)
 library(RColorBrewer)
 
-# Load data
-data <- read.csv("C:/Users/Username/OneDrive/Name.csv",
+# Load and prepare data
+data <- read.csv("Path/to/file.csv",
                  header = TRUE, stringsAsFactors = FALSE)
 colnames(data) <- trimws(colnames(data))
 data$Group <- factor(data$Group)
@@ -28,8 +28,8 @@ signature_list <- list(
   Shen = c("NPTX2", "SMOC1", "GFAP", "SMOC2", "PEA15", "TNFRSF1B"),
   Ali = c("TMOD2", "SMOC1", "YWHAG", "TMED2", "LRRN1", "HHIP", "CD248", "PPP3R1", "PPP1R1A", "MIF"),
   VZ = c("ALDOA", "PKM", "LDHB"),
-  # Liu = c("AT1B1", "SRGN", "PRDX3"),
-  # Campo = c("MMP10", "ABL1", "SDC4", "ITGB2", "CLEC5A", "TREM1", "SPON2", "THBD"),
+  Liu = c("AT1B1", "SRGN", "PRDX3"),
+  Campo = c("MMP10", "ABL1", "SDC4", "ITGB2", "CLEC5A", "TREM1", "SPON2", "THBD"),
   Guo1 = c("ACHE", "YWHAG", "PCSK1", "MMP10", "IRF1"),
   Guo2 = c("YWHAG", "SMOC1", "PIGR", "TMOD2"),
   Hou = c("YWHAZ", "LDHA", "PKM", "CHI3L1", "BASP1", "SMOC1", "ENO2", "PRDX1", "VSTM2A", "F2", "SOD1", "FN1"),
