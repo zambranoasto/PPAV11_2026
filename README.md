@@ -6,8 +6,8 @@ The repository contains the code for bioinformatic analysis used in the paper "A
 This study aimed to identify a reproducible protein biomarker signature using publicly available CSF proteomic datasets and to perform a head-to-head comparison of our signature against published proteomic panels to rigorously assess the stability of their diagnostic and prognostic performance across independent cohorts.
 
 ## Content
-1. Principal component analysis
-2. Boxplots for protein abundance 
+1. Boxplots for protein abundance 
+2. Principal component analysis
 3. ROC curve analysis for diagnosis: cross-validation model for SomaScan-derived data
 4. ROC curve analysis for diagnosis: independent training and testing for LC-MS/MS-derived data
 5. Hazard models for prognosis
@@ -29,10 +29,6 @@ The code was tested using R (v4.3.0) on Windows, but it should be compatible wit
 Before running the scripts, the working directory containing the input data must be specified at the beginning of each R script. Input datasets links and preprocessing steps are described in DATA_README.md.
 
 The scripts can be run independently, but are intended to be executed in the following order:
-1. ROC_curve_cross_validation.R
-2. ROC_curve_independent_training_testing.R
-3. Prognosis_analysis.R
-4. Enrichment_analysis.R
 1. boxplots.R
 2. pca.R
 3. roc_cross_validation.R
