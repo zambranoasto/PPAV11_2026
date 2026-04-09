@@ -1,5 +1,5 @@
 # Prognosis analysis of CSF proteomic biomarker signatures (Hazard models)
-# Input data described in Data README.md
+# Input data described in DATA_README.md
 
 # Acquire signature scores
 # Import required libraries
