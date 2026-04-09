@@ -1,11 +1,11 @@
-# Principal component analysis (PCA) comparing control and group of interest
-# Data for input is described in Data README.md
+# Principal component analysis (PCA) of PPAV11 
+# Input data described in DATA_README.md
 
-# Required libraries
+# Import required libraries
 library(ggplot2)
 library(ggfortify)
 
-# Load and prepare data
+# Load and prepare dataset
 data <- read.csv("Path/to/file.csv")
 ID <- data[[1]]               
 Group <- as.factor(data[[2]])   
@@ -19,7 +19,7 @@ ID_clean <- ID[rows_complete]
 # Run PCA 
 pca_result <- prcomp(protein_matrix_clean, scale. = FALSE)
 
-# Create dataframe 
+# Create dataframe with PCA scores and metadata
 plot_data <- data.frame(protein_matrix_clean)
 plot_data$Group <- Group_clean
 
@@ -27,16 +27,17 @@ pca_scores <- as.data.frame(pca_result$x)
 pca_scores$Group <- Group_clean
 pca_scores$ID <- ID_clean
 
+# Extract PCA loadings and scale 
 loadings <- as.data.frame(pca_result$rotation[, 1:2])
 loadings$Protein <- rownames(loadings)
 scaling_factor <- max(abs(pca_scores$PC1), abs(pca_scores$PC2)) * 0.7
 loadings$PC1 <- loadings$PC1 * scaling_factor
 loadings$PC2 <- loadings$PC2 * scaling_factor
 
-# Variance
+# Calculate variance 
 var_explained <- round(100 * summary(pca_result)$importance[2, 1:2], 1)
 
-# Plot
+# Generate PCA plot
 ggplot() +
   stat_ellipse(data = pca_scores, aes(x = PC1, y = PC2, fill = Group), 
                geom = "polygon", alpha = 0.2, level = 0.95) +
