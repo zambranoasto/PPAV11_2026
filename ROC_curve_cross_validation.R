@@ -1,8 +1,8 @@
 # ROC curve analysis of CSF proteomic biomarker signatures
 # Cross-validation logistic regression model, optimal threshold with Youden index
-# Data for input is described in Data README.md
+# Input data described in Data README.md
 
-# Required libraries
+# Import required libraries
 library(pROC)
 library(ggplot2)
 library(caret)
@@ -11,14 +11,14 @@ library(tibble)
 library(purrr)
 library(RColorBrewer)
 
-# Load and prepare data
+# Load and prepare dataset
 data <- read.csv("Path/to/file.csv",
                  header = TRUE, stringsAsFactors = FALSE)
 colnames(data) <- trimws(colnames(data))
 data$Group <- factor(data$Group)
 levels(data$Group) <- c("Control", "Case")
 
-# Biomarker signatures
+# Define biomarker signatures
 signature_list <- list(
   Bader = c("MAPT", "PKM", "YWHAZ", "ALDOC", "IMPA1"),
   Wang = c("SMOC1", "MAPT", "GFAP", "SUCLG2", "PRDX3", "NTN1"),
@@ -36,7 +36,7 @@ signature_list <- list(
   Yun  = c("YWHAZ", "EPHA5", "CABIN1", "SST", "PPIA", "CNTN5", "GFAP", "POMC", "RSPO1", "TPT1", "MINDY2", "PRDX6")
 )
 
-# Assigned colors for signatures
+# Assign colors to signatures
 signature_colors <- c(
   PPAV11 = "olivedrab3", PPA5 = "darkorchid4", Bader = "blue4", Wang = "darkorchid",
   Sathe = "aquamarine3", Tao = "maroon4", Shen = "lightpink3", Ali = "cyan3",
@@ -44,12 +44,12 @@ signature_colors <- c(
   Guo2 = "gold1", Hou = "turquoise4", Yun = "salmon3"
 )
 
-# Filter genes that are present in the dataset
+# Filter genes present in dataset
 filter_genes <- function(signature) intersect(signature, colnames(data))
 signatures <- lapply(signature_list, filter_genes)
 print(signatures)
 
-# Function to compute ROC curves using k-fold cross-validation
+# Define function to compute ROC curves
 calculate_roc_cv <- function(genes, signature_name, k = 5, rep = 10) {
   signature_data <- data[, c(genes, "Group")]
   signature_data <- na.omit(signature_data)
@@ -144,7 +144,7 @@ auc_vec <- map_dbl(results, "auc")
 ordered_signatures <- names(sort(auc_vec, decreasing = TRUE))
 roc_df$Signature <- factor(roc_df$Signature, levels = ordered_signatures)
 
-# Define labels
+# Define labels for plots
 signature_labels <- sapply(ordered_signatures, function(signature) {
   res <- results[[signature]]
   auc_val <- round(res$auc, 3)
@@ -155,7 +155,7 @@ signature_labels <- sapply(ordered_signatures, function(signature) {
   paste0(signature, " (", auc_val, ", ", ci_low, "-", ci_high, ", ", sens, ", ", spec, ")")
 })
 
-# Plot
+# Generate ROC plots
 ggplot(roc_df, aes(x = FPR, y = TPR, color = Signature)) +
   geom_line(size = 1) +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed") +
