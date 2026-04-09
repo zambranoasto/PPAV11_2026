@@ -1,8 +1,8 @@
 # ROC curve analysis of CSF proteomic biomarker signatures
-# Independent training and validation, logistic regression model, optimal threshold with Youden index
-# Data for input is described in Data README.md
+# Independent training and validation, logistic regression model, optimal threshold determined by Youden index
+# Input data described in Data README.md
 
-# Required libraries
+# Import required libraries
 library(pROC)
 library(ggplot2)
 library(dplyr)
@@ -10,12 +10,12 @@ library(tibble)
 library(purrr)
 library(caret)
 
-# Load data and prepare data
-train_data1 <- read.csv("C:/Users/Username/OneDrive/Name.csv",
+# Load and prepare datasets
+train_data1 <- read.csv("Path/to/file.csv",
                         header = TRUE, stringsAsFactors = FALSE)
-train_data2 <- read.csv("C:/Users/Username/OneDrive/Name.csv",
+train_data2 <- read.csv("Path/to/file.csv",
                         header = TRUE, stringsAsFactors = FALSE)
-validation_data <- read.csv("C:/Users/Username/OneDrive/Name.csv",
+validation_data <- read.csv("Path/to/file.csv",
                             header = TRUE, stringsAsFactors = FALSE)
 colnames(train_data1) <- trimws(colnames(train_data1))
 colnames(train_data2) <- trimws(colnames(train_data2))
@@ -59,7 +59,7 @@ signatures_train <- lapply(signatures_list,
                            validation_data = validation_data)
 print(signatures_train)
 
-# Define colors for signatures 
+# Assign colors to signatures
 signature_colors <- c(
   PPAV11 = "olivedrab3", Bader = "blue4", Wang = "darkorchid",
   Sathe = "aquamarine3", Tao = "maroon4", Shen = "lightpink3",
@@ -68,7 +68,7 @@ signature_colors <- c(
   Hou = "turquoise4", Yun = "salmon3"
 )
 
-# Train  model and compute ROC 
+# Define function to compute ROC curves
 compute_roc_train_validate <- function(genes, signature_name, train_data, validation_data) {
   genes_common <- intersect(genes, colnames(train_data))
   genes_common <- intersect(genes_common, colnames(validation_data))
@@ -145,21 +145,21 @@ compute_roc_train_validate <- function(genes, signature_name, train_data, valida
   ))
 }
 
-# Run analysis
+# Compute ROC results
 results <- map2(signatures_train,
                 names(signatures_train),
                 ~ compute_roc_train_validate(.x,.y,train_data,validation_data))
 names(results) <- names(signatures_train)
 results <- compact(results)
 
-# Prepare ROC plot data 
+# Prepare data for plot
 roc_data <- bind_rows(map(results,"roc_df"))
 auc_vec <- map_dbl(results,"auc")
 signature_order <- names(sort(auc_vec,decreasing = TRUE))
 roc_data$Signature <- factor(roc_data$Signature,
                              levels = signature_order)
 
-# Define labels
+# Define labels for plots
 signature_labels <- sapply(signature_order,function(sig){
   roc_obj <- results[[sig]]$roc_obj
   ci_auc <- ci.auc(roc_obj)
@@ -171,7 +171,7 @@ signature_labels <- sapply(signature_order,function(sig){
   paste0(sig," (",auc_val,", ",ci_low,"-",ci_high,", ",sens,", ",spec,")")
 })
 
-# Plot ROC curves 
+# Generate ROC plots
 ggplot() +
   geom_line(data = roc_data,
             aes(x = FPR,
@@ -184,7 +184,7 @@ ggplot() +
               color = "gray") +
   scale_color_manual(values = signature_colors[signature_order],
                      labels = signature_labels) +
-  labs(title = "JohnsonTao/Emory",
+  labs(title = "Name",
        x = "1 - Specificity",
        y = "Sensitivity",
        color = "Signature (AUC, CI 95%, Sensitivity, Specificity)") +
@@ -197,15 +197,3 @@ preds_all <- map_dfr(results,
                      .id = "Signature")
 preds_all$Signature <- factor(preds_all$Signature,
                               levels = signature_order)
-ggplot(preds_all,
-       aes(x = TrueDiagnosis,
-           y = Probability,
-           color = TrueDiagnosis)) +
-  geom_jitter(width = 0.2,
-              alpha = 0.7,
-              size = 2) +
-  facet_wrap(~Signature,
-             scales = "free_y") +
-  labs(title = "Predicted probability vs true diagnosis by signature",
-       x = "True diagnosis",
-       y = "Predicted probability")
