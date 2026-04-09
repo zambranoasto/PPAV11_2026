@@ -1,20 +1,18 @@
 # Limma correlation analysis, proteins abundance adjusted by age and sex
-# Data for input is described in Data README.md
+# Input data described in Data README.md
 
-# Load packages
+# Import required libraries
 library(tidyverse)
 library(limma)
 library(pheatmap)
 library(viridis)
 library(dplyr)
 
-# Load data
+# Load and prepare dataset
 expr_matrix <- read.csv("Path/to/file.csv", 
                         row.names = 1, check.names = FALSE)
 clinical_data <- read.csv("Path/to/file.csv",
                           stringsAsFactors = FALSE)
-
-# Align subjects between both files
 common_ids <- intersect(colnames(expr_matrix), clinical_data$RID)
 expr_matrix <- expr_matrix[, common_ids]
 clinical_data <- clinical_data %>%
@@ -24,7 +22,7 @@ clinical_data <- clinical_data %>%
 # expr_mat_scaled <- t(scale(t(expr_mat))
 original_protein_order <- rownames(expr_matrix)
 
-# Define clinical variables to analyze
+# Define clinical variables
 clinical_vars <- c("FDG", "AV45", "ABETA", "TAU", "PTAU", "CDRSB", "ADAS13", "ADASQ4",
                    "MMSE", "RAVLT_immediate", "RAVLT_learning", "LDELTOTAL", "TRABSCOR",
                    "FAQ", "MOCA", "EcogSPTotal", "Ventricles", "Hippocampus", "WholeBrain",
@@ -32,7 +30,7 @@ clinical_vars <- c("FDG", "AV45", "ABETA", "TAU", "PTAU", "CDRSB", "ADAS13", "AD
 
 limma_results <- list()
 
-# Function to run LIMMA per clinical variable 
+# Define function to run LIMMA 
 run_limma_per_trait <- function(trait_name) {
   trait_values <- clinical_data[[trait_name]]
   valid_idx <- which(!is.na(trait_values))
@@ -53,7 +51,7 @@ run_limma_per_trait <- function(trait_name) {
   return(results)
 }
 
-# Run analysis for all clinical variables
+# Run LIMMA analysis
 for (trait in clinical_vars) {
   res <- run_limma_per_trait(trait)
   if (!is.null(res)) {
@@ -61,16 +59,16 @@ for (trait in clinical_vars) {
   }
 }
 
-# Combine results
+# Combine results into a single dataframe
 all_results <- bind_rows(limma_results)
 
-# Create  matrix for heatmap
+# Create  matrix for heatmap visualization
 beta_matrix <- all_results %>%
   select(Protein, Trait, logFC) %>%
   pivot_wider(names_from = Trait, values_from = logFC) %>%
   column_to_rownames("Protein")
 
-# Create label matrix 
+# Create label matrix for clinical variables
 label_matrix <- all_results %>%
   select(Protein, Trait, logFC, adj.P.Val) %>%
   mutate(label = ifelse(adj.P.Val < 0.05,
@@ -84,12 +82,12 @@ label_matrix <- all_results %>%
 beta_matrix <- beta_matrix[original_protein_order, , drop = FALSE]
 label_matrix <- label_matrix[original_protein_order, , drop = FALSE]
 
-# Define colors and breaks for heatmap
+# Assign colors and breaks for heatmap
 max_abs_beta <- max(abs(beta_matrix), na.rm = TRUE)
 breaks <- seq(-max_abs_beta, max_abs_beta, length.out = 101)
 colors <- rev(viridis(100, option = "D"))
 
-# Plot heatmap
+# Generate heatmap plot
 pheatmap(beta_matrix,
          color = colors,
          breaks = breaks,
@@ -100,4 +98,4 @@ pheatmap(beta_matrix,
          fontsize = 9,
          border_color = NA,
          number_color = "white",
-         main = "LIMMA per clinical variable (adjusted for age and sex, absolute values)")
+         main = "Name")
