@@ -1,5 +1,5 @@
 # ROC curve analysis of CSF proteomic biomarker signatures
-# Cross-validation logistic regression model, optimal threshold with Youden index
+# Cross-validation logistic regression model, optimal threshold determined by Youden index
 # Input data described in Data README.md
 
 # Import required libraries
