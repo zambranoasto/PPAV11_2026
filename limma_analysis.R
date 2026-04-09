@@ -1,5 +1,5 @@
 # Limma correlation analysis, proteins abundance adjusted by age and sex
-# Input data described in Data README.md
+# Input data described in DATA_README.md
 
 # Import required libraries
 library(tidyverse)
