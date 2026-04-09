@@ -1,8 +1,8 @@
 # Prognosis analysis of CSF proteomic biomarker signatures (Hazard models)
-# Data for input is described in Data README.md
+# Input data described in Data README.md
 
-# Acquisiton of signatures scores 
-# Required libraries
+# Acquire signature scores
+# Import required libraries
 library(pROC)
 library(caret)
 library(dplyr)
@@ -10,14 +10,14 @@ library(tibble)
 library(purrr)
 library(readr)
 
-# Load and prepare data
+# Load and prepare dataset
 data <- read_csv("Path/to/file.csv",
                  col_types = cols())
 colnames(data) <- trimws(colnames(data))
 data$Group <- factor(data$Group)
 levels(data$Group) <- c("0", "1")  # Positive level = "Case"
 
-# Define signatures
+# Define biomarker signatures
 signatures <- list(
   Bader = c("MAPT", "PKM", "YWHAZ", "ALDOC", "IMPA1"),
   Wang = c("SMOC1", "MAPT", "GFAP", "SUCLG2", "PRDX3", "NTN1"),
@@ -35,7 +35,7 @@ signatures <- list(
   Yun  = c("YWHAZ", "EPHA5", "CABIN1", "SST", "PPIA", "CNTN5", "GFAP", "POMC", "RSPO1", "TPT1", "MINDY2", "PRDX6")
 )
 
-# Function to calculate scores 
+# Define function to calculate scores 
 calculate_scores_per_subject <- function(signature_data, k = 5, rep = 10) {
   scores <- list()
   set.seed(123)
@@ -80,14 +80,14 @@ for (signature_name in names(signatures)) {
   signature_results[[signature_name]] <- average_score
 }
 
-# Combine  scores into a single dataframe
+# Combine scores into a single dataframe
 final_scores <- reduce(signature_results, full_join, by = c("RID", "Group"))
 
-# Save to CSV
+# Save combined scores to CSV
 write_csv(final_scores, "output.csv")
 
-# Prognosis analysis, all signatures comparison
-# Required libraries
+# Prognosis analysis: all signatures comparison
+# Import required libraries
 library(survival)
 library(dplyr)
 library(ggplot2)
@@ -95,7 +95,7 @@ library(readr)
 library(tibble)
 library(tidyr)
 
-# Biomarker signatures
+# Define biomarker signatures
 signatures <- c("score_PPAV11", "score_Bader", "score_Wang", "score_Sathe",
                 "score_Tao", "score_Shen", "score_Ali", "score_VZ",
                 "score_Liu", "score_Campo", "score_Guo1", "score_Guo2",
@@ -106,13 +106,14 @@ risk_logic <- tibble(
                     "Low", "Low", "Low", "Low", "High", "High", "Low", "High", "High")
 )
 
-# Load data
+# Load and prepare dataset
 dat <- read_csv("Path/to/file.csv") # Use the output csv from last step 
 dat <- dat %>%
   mutate(sex = factor(sex, levels = c("Female", "Male")))
 
-# Cox binary function 
-fit_cox_clinical <- function(var) {
+
+# Define Cox binary function
+  fit_cox_clinical <- function(var) {
   cutoff <- median(dat[[var]], na.rm = TRUE)
   risk <- risk_logic %>% filter(signature == var) %>% pull(clinical_risk)
   dat_bin <- dat %>%
@@ -132,7 +133,7 @@ fit_cox_clinical <- function(var) {
     paste("Risk ↑ if", var, "is high")
   }
   
-  # Print to console 
+  # Print results to console
   cat("\n==============================\n")
   cat("Signature:", var, "\n")
   cat("HR:", round(hr, 3), " [", round(lower, 3), "-", round(upper, 3), "]\n")
@@ -154,12 +155,12 @@ fit_cox_clinical <- function(var) {
 clinical_results <- lapply(signatures, fit_cox_clinical)
 clinical_results <- do.call(rbind, clinical_results[!sapply(clinical_results, is.null)])
 
-# Order by HR 
+# Order results by HR
 clinical_results <- clinical_results %>%
   arrange(desc(HR_risk_group_vs_reference)) %>%
   mutate(signature = factor(signature, levels = signature))
 
-# Forest plot 
+# Generate forest plot 
 ggplot(clinical_results, aes(x = signature, y = HR_risk_group_vs_reference, color = clinical_risk)) +
   geom_point(size = 4) +
   geom_hline(yintercept = 1, linetype = "dashed", color = "gray40") +
@@ -176,17 +177,15 @@ ggplot(clinical_results, aes(x = signature, y = HR_risk_group_vs_reference, colo
   geom_text(aes(label = paste0("p=", signif(p_value, 3))), hjust = -0.2, size = 4)
 
 
-# Prognosis analysis, one signature (Kaplan-Meier)                              
-# Required libraries
+# Prognosis analysis: single signature (Kaplan-Meier)
+# Import required libraries
 library(survival)
 library(survminer)
 library(dplyr)
 library(readr)
 
-# Load data
+# Load and prepare dataset
 dat <- read_csv("Path/to/file.csv")
-
-# Transformations 
 dat <- dat %>%
   mutate(
     sex = factor(sex, levels = c("Female", "Male")),
@@ -195,14 +194,14 @@ dat <- dat %>%
   ) %>%
   drop_na(score_PPAV11_bin, time_followup, status, age, sex)
 
-# Cox model 
+# Fit Cox proportional hazards model
 cox_ppav11 <- coxph(Surv(time_followup, status) ~ score_PPAV11_bin + age + sex, data = dat)
 summary(cox_ppav11)
 
-# Kaplan-Meier curve
+# Fit Kaplan-Meier survival curve                                  
 fit_km <- survfit(Surv(time_followup, status) ~ score_PPAV11_bin, data = dat)
 
-# Plot
+# Plot Kaplan-Meier curve 
 ggsurvplot(
   fit_km,
   data = dat,
