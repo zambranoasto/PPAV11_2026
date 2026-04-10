@@ -17,7 +17,7 @@ The following datasets are used as input for the script boxplots.R.
 - **Input CSVs include:** ID, diagnosis (0 = control, 1 = group of interest), and protein log₂ abundance values per subject.
 
 ### Johnson et al. (2020) cohort
-- **Original file:** "2b.unregressed_Batch-corrected_cleanDat_Cohort2". Obtained from https://www.synapse.org/ (Synapse ID: syn20821165).
+- **Original file:** "2b.unregressed_Batch-corrected_cleanDat_Cohort2.csv". Obtained from https://www.synapse.org/ (Synapse ID: syn20821165).
 - - **Processing:** Inclusion of subject sex information.
 - **Stratification:** Biological stratification based on A−T− and A+T+.
 - **Input CSVs include:** ID, diagnosis (0 = control, 1 = group of interest), and protein log₂ abundance values per subject.
