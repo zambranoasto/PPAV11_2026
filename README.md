@@ -6,13 +6,13 @@ The repository contains the code for bioinformatic analysis used in the paper "A
 This study aimed to identify a reproducible protein biomarker signature using publicly available CSF proteomic datasets and to perform a head-to-head comparison of our signature against published proteomic panels to rigorously assess the stability of their diagnostic and prognostic performance across independent cohorts.
 
 ## Content
-1. Boxplots for protein abundance 
-2. Principal component analysis
-3. ROC curve analysis for diagnosis: cross-validation model for SomaScan-derived data
-4. ROC curve analysis for diagnosis: independent training and testing for LC-MS/MS-derived data
-5. Hazard models for prognosis
-6. LIMMA analysis for correlation of protein abundance and clinical variables
-7. Functional enrichment and pathway analysis
+1. Boxplots for protein abundance - boxplots.R
+2. Principal component analysis - pca.R
+3. ROC curve analysis for diagnosis: cross-validation model for SomaScan-derived data - roc_cross_validation.R
+4. ROC curve analysis for diagnosis: independent training and testing for LC-MS/MS-derived data - roc_independent_train_test.R
+5. Hazard models for prognosis - prognosis_analysis.R
+6. LIMMA analysis for correlation of protein abundance and clinical variables - limma_analysis.R
+7. Functional enrichment and pathway analysis - enrichment_analysis.R
 
 ## Data
 The proteomics data used in this study are available at:  
