@@ -1,4 +1,4 @@
-# Boxplot analysis 
+## Boxplot analysis 
 ### Analysis on ADNI database
 - **Original file:** "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
 - **Processing:** Protein abundance log₂ transformation, inclusion of protein names, subject diagnosis, and sex information.
