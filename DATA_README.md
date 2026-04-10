@@ -1,4 +1,9 @@
-## Boxplot analysis 
+# Introduction
+This file describes how the proteomic and clinical datasets were acquired, processed, and organized for the bioinformatic analyses presented in the paper "A reproducibility-based cerebrospinal fluid proteomics signature outperforms published biomarkers for Alzheimer’s disease diagnosis and prognosis".
+
+# Boxplot analysis 
+The following datasets are used as input for the script boxplots.R.
+
 ### Analysis on ADNI database
 - **Original file:** "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
 - **Processing:** Protein abundance log₂ transformation, inclusion of protein names, subject diagnosis, and sex information.
@@ -18,6 +23,7 @@
 - **Input CSVs include:** ID, diagnosis (0 = control, 1 = group of interest), and protein log₂ abundance values per subject.
 
 # ROC curve cross-validation analysis
+The following datasets are used as input for the script roc_cross_validation.R and pca.R.
 
 ### Analysis on ADNI database
 - **Original file:** "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
@@ -31,9 +37,8 @@
 - **Stratification:** Subjects with PD included those classified as sporadic PD or LRRK2-associated PD. Control subjects corresponded to individuals classified as Healthy Controls.
 - **Input CSV includes:** ID, group (0 = control, 1 = PD), and protein log₂ abundance values per subject.
 
-**Note:** Same datasets were used for Principal Component Analysis 
-
 # ROC curve independent training testing analysis
+The following datasets are used as input for the script roc_independent_train_test.R.
 
 ## Training datasets
 
@@ -60,6 +65,8 @@
 - **Input CSVs:** The final input datasets included the two training cohorts and one validation cohort. Each file contained ID, group (0 = control, 1 = group of interest), and protein log₂ z-score abundance values per subject.
 
 # Prognosis analysis
+The following datasets are used as input for the script prognosis_analysis.R.
+
 ### Acquisition of signature scores 
 - **Original file:** "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
 - **Processing:** Protein abundance log₂ transformation, inclusion of protein names, and subject diagnosis.
@@ -73,6 +80,7 @@
 - **Input CSVs include:** RID, time_followup, status, age, sex, and signature scores.
 
 # LIMMA analysis
+The following datasets are used as input for the script limma_analysis.R.
 
 ## Expression proteomics matrix
 - **Original file:** "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
