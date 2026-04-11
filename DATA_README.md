@@ -1,5 +1,5 @@
 # Introduction
-This file describes how the proteomic and clinical datasets were acquired, processed, and organized for the bioinformatic analyses presented in the paper "A reproducibility-based cerebrospinal fluid proteomics signature outperforms published biomarkers for Alzheimer’s disease diagnosis and prognosis".
+This file describes how the proteomic and clinical datasets were acquired, processed, and organized for the bioinformatic analyses presented in the paper "Reproducibility-driven discovery and systematic benchmarking reveals a robust cerebrospinal fluid proteomic signature in Alzheimer’s disease".
 
 # Boxplot analysis 
 The following datasets are used as input for the script boxplots.R.
