@@ -1,7 +1,7 @@
-# A reproducibility-based cerebrospinal fluid proteomics signature outperforms published biomarkers for Alzheimer’s disease diagnosis and prognosis
+# Reproducibility-driven discovery and systematic benchmarking reveals a robust cerebrospinal fluid proteomic signature in Alzheimer’s disease
 
 ## Introduction
-The repository contains the code for bioinformatic analysis used in the paper "A reproducibility-based cerebrospinal fluid proteomics signature outperforms published biomarkers for Alzheimer’s disease diagnosis and prognosis". 
+The repository contains the code for bioinformatic analysis used in the paper "Reproducibility-driven discovery and systematic benchmarking reveals a robust cerebrospinal fluid proteomic signature in Alzheimer’s disease". 
 
 This study aimed to identify a reproducible protein biomarker signature using publicly available CSF proteomic datasets and to perform a head-to-head comparison of our signature against published proteomic panels to rigorously assess the stability of their diagnostic and prognostic performance across independent cohorts.
 
