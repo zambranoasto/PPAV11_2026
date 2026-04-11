@@ -1,4 +1,4 @@
-# Boxplot and statistical analysis of protein abundance og PPAV11
+# Boxplot and statistical analysis of protein abundance of PPAV11
 # Comparison across groups stratified by sex and ethnicity
 # Input data described in DATA_README.md
 
