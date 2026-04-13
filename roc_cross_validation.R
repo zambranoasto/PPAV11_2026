@@ -162,10 +162,10 @@ ggplot(roc_df, aes(x = FPR, y = TPR, color = Signature)) +
   scale_color_manual(values = signature_colors[ordered_signatures],
                      labels = signature_labels) +
   scale_fill_manual(values = signature_colors[ordered_signatures], guide = "none") +
-  labs(title = "Cohort 4 AD vs CN",
+  labs(title = "Name",
        x = "1 - Specificity",
        y = "Sensitivity",
-       color = "Signature (AUC, 95% CI, Sensitivity, Specificity)") +
+       color = "Signature (AUC, CI 95%, Sensitivity, Specificity)") +
   theme_minimal() +
   theme(
     plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
