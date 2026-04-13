@@ -19,7 +19,7 @@ ID_clean <- ID[rows_complete]
 # Run PCA 
 pca_result <- prcomp(protein_matrix_clean, scale. = FALSE)
 
-# Create dataframe with PCA scores
+# Create dataframe with PCA scores and group data
 plot_data <- data.frame(protein_matrix_clean)
 plot_data$Group <- Group_clean
 
