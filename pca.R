@@ -54,7 +54,7 @@ ggplot() +
   scale_fill_manual(values = c("0" = "blue4", "1" = "maroon4")) +
   theme(legend.title = element_blank())
 
-# MANOVA statistical analysis to evaluate group separation
+# Run MANOVA statistical analysis to evaluate group separation
 manova_result <- manova(cbind(PC1, PC2) ~ Group, data = pca_scores)
 summary_manova <- summary(manova_result)
 cat("Summary of MANOVA analysis (PC1 and PC2):\n")
