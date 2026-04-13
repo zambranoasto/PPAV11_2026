@@ -82,7 +82,7 @@ The following datasets are used as input for the script prognosis_analysis.R.
 ### Prognosis analysis
 - **Original files:** Output files obtained from "Acquisition of signature scores"
 - **Processing:** Inclusion of clinical data (age, sex, diagnosis, time of visit, and change in diagnosis) from "ADNIMERGE_21Apr2025.csv". 
-- **Stratification:** Only participants with longitudinal follow-up were included in the analysis. (1) CU individuals to analyze the transition from CU to MCI (n = 143), and (2) A+T+ individuals (defined using the Aβ/pTau ratio) with baseline MCI to evaluate the transition from MCI to dementia (n = 174). 
+- **Stratification:** Only participants with longitudinal follow-up were included in the analysis. (1) CU individuals to analyze the transition from CU to MCI (n = 143), and (2) A+T+ individuals (based on Aβ/p-Tau ratio) with baseline MCI to evaluate the transition from MCI to dementia (n = 174). 
 - **Input CSVs include:** RID, time_followup, status, age, sex, and signature scores.
 
 # LIMMA analysis
