@@ -9,7 +9,7 @@ library(pheatmap)
 library(viridis)
 library(dplyr)
 
-# Load and prepare dataset
+# Load and prepare datasets
 expr_matrix <- read.csv("Path/to/file.csv", 
                         row.names = 1, check.names = FALSE)
 clinical_data <- read.csv("Path/to/file.csv",
