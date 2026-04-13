@@ -1,4 +1,4 @@
-# Reproducibility-driven discovery and systematic benchmarking reveals a robust cerebrospinal fluid proteomic signature in Alzheimer’s disease
+# Reproducibility-driven discovery and systematic benchmarking reveal a robust cerebrospinal fluid proteomic signature in Alzheimer’s disease
 
 ## Introduction
 The repository contains the code for bioinformatic analysis used in the paper "Reproducibility-driven discovery and systematic benchmarking reveals a robust cerebrospinal fluid proteomic signature in Alzheimer’s disease". 
