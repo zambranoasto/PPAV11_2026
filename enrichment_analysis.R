@@ -37,7 +37,7 @@ genes_entrez_df <- bitr(genes_symbol, fromType = "SYMBOL",
                         toType = "ENTREZID", OrgDb = org.Hs.eg.db)
 genes_entrez <- genes_entrez_df$ENTREZID
 
-# Run KEGG and REACTOME enrichment analysis
+# Run KEGG and REACTOME enrichment analyses
 ekegg <- enrichKEGG(gene = genes_entrez, organism = "hsa", pvalueCutoff = 0.05)
 ekegg <- setReadable(ekegg, OrgDb = org.Hs.eg.db, keyType = "ENTREZID")
 ereact <- enrichPathway(gene = genes_entrez, organism = "human",
@@ -146,7 +146,7 @@ generate_GO_diagram <- function(genes_symbol, file_name = "GOdiagram.pdf") {
 return(terms_go)
 }
 
-# Generate KEGG and Reactome plot
+# Generate KEGG and REACTOME plot
 terms_pathways <- rbind(terms_kegg, terms_react)
 long_path <- do.call(rbind, lapply(1:nrow(terms_pathways), function(i) {
   genes <- unlist(strsplit(terms_pathways$genes[i], "/"))
