@@ -10,30 +10,30 @@ This study aimed to identify a reproducible protein biomarker signature using pu
 2. Principal component analysis 
 3. ROC curve analysis for diagnosis: cross-validation model for SomaScan-derived data 
 4. ROC curve analysis for diagnosis: independent training and testing for LC-MS/MS-derived data 
-5. Hazard models for prognosis 
+5. Hazard models for prognosis analysis
 6. LIMMA analysis for correlation of protein abundance and clinical variables 
 7. Functional enrichment and pathway analysis 
 
 ## Data
-The proteomics data used in this study are available at:  
+The proteomics datasets used in this study are available at:  
 1. ADNI: https://adni.loni.usc.edu 
 2. Bader et al. (2020): Supplemental Information https://doi.org/10.15252/msb.20199356 
 3. Bangs et al. (2025): https://www.synapse.org/Synapse:syn65461849
-4. Johnson et al. (2020): https://www.synapse.org/Synapse:syn20821165/wiki/596086
+4. Johnson et al. (2020): https://www.synapse.org/Synapse:syn20821165
 5. PPMI: https://www.ppmi-info.org/ 
 6. Tao et al. (2024): Supplemental Information https://doi.org/10.1016/j.xinn.2023.100544 
 
 ## Instructions
 The code was tested using R (v4.3.0) on Windows, but it should be compatible with later versions of R and other operating systems. 
 
-Before running the scripts, the working directory containing the input data must be specified at the beginning of each R script. Input datasets links and preprocessing steps are described in DATA_README.md.
+Before running the scripts, the working directory containing the input data must be specified at the beginning of each R script. Input datasets links and processing steps are described in DATA_README.md.
 
 The scripts can be run independently, but are intended to be executed in the following order:
 1. boxplots.R
 2. pca.R
 3. roc_cross_validation.R
 4. roc_independent_train_test.R
-5.prognosis_analysis.R
+5. prognosis_analysis.R
 6. limma_analysis.R
 7. enrichment_analysis.R
 
