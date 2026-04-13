@@ -4,7 +4,7 @@ This file describes how the proteomic and clinical datasets were acquired, proce
 # Boxplot analysis 
 The following datasets are used as input for the script boxplots.R.
 
-### ADNI
+### ADNI cohort
 - **Original files:**
   1. Proteomics: "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
   2. Clinical and demographic data: "ADNIMERGE_21Apr2025.csv" obtained from ADNI (https://adni.loni.usc.edu).
