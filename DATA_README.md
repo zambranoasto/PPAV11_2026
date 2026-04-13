@@ -4,7 +4,7 @@ This file describes how the proteomic and clinical datasets were acquired, proce
 # Boxplot analysis 
 The following datasets are used as input for the script boxplots.R.
 
-### Analysis on ADNI database
+### ADNI
 - **Original files:**
   1. Proteomics: "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
   2. Clinical and demographic data: "ADNIMERGE_21Apr2025.csv" obtained from ADNI (https://adni.loni.usc.edu).
@@ -95,13 +95,13 @@ The following datasets are used as input for the script prognosis_analysis.R.
 # LIMMA analysis
 The following datasets are used as input for the script limma_analysis.R.
 
-## Expression proteomics matrix
+### Expression proteomics matrix
 - **Original file:** "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
 - **Stratification:** Only A+T+ individuals (defined using the Aβ/pTau ratio) were selected (n = 408).
 - **Processing:** protein abundance log2 transformation and inclusion of protein names.
 - **Input CSV includes:** RID and protein log₂ abundance values for PPAV11 and core biomarkers per subject.
 
-## Clinical data
+### Clinical dataset
 - **Original file:** "ADNIMERGE_21Apr2025.csv" obtained from ADNI (https://adni.loni.usc.edu).
 - **Stratification:** Only A+T+ individuals (defined using the Aβ/pTau ratio) were selected (n = 408), together with the clinical variables of interest.
 - **Input CSV includes:** RID, Age, Sex, PTEDUCAT, FDG, PIB, AV45, APOE4, ABETA, TAU, PTAU, pTau/AB, CDRSB, ADAS11, ADAS13, ADASQ4, MMSE, RAVLT_immediate, RAVLT_learning, RAVLT_forgetting, RAVLT_perc_forgetting, LDELTOTAL, DIGITSCOR, TRABSCOR, FAQ, MOCA, EcogPtMem, EcogPtLang, EcogPtVisspat, EcogPtPlan, EcogPtOrgan, EcogPtDivatt, EcogPtTotal, EcogSPMem, EcogSPLang, EcogSPVisspat, EcogSPPlan, EcogSPOrgan, EcogSPDivatt, EcogSPTotal, Ventricles, Hippocampus, WholeBrain, Entorhinal, Fusiform, MidTemp, ICV.
