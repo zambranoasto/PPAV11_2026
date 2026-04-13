@@ -1,12 +1,15 @@
 # Introduction
-This file describes how the proteomic and clinical datasets were acquired, processed, and organized for the bioinformatic analyses presented in the paper "Reproducibility-driven discovery and systematic benchmarking reveals a robust cerebrospinal fluid proteomic signature in Alzheimer’s disease".
+This file describes how the proteomic and clinical datasets were acquired, processed, and organized for the bioinformatic analyses performed in the paper "Reproducibility-driven discovery and systematic benchmarking reveal a robust cerebrospinal fluid proteomic signature in Alzheimer’s disease".
 
 # Boxplot analysis 
 The following datasets are used as input for the script boxplots.R.
 
 ### Analysis on ADNI database
-- **Original file:** "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
-- **Processing:** Protein abundance log₂ transformation, inclusion of protein names, subject diagnosis, and sex information.
+- **Original files:**
+  1. Proteomics: "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
+  2. Clinical and demographic data: "ADNIMERGE_21Apr2025.csv" obtained from ADNI (https://adni.loni.usc.edu).
+  3. Analyte names: "ADNI_Cruchaga_lab_CSF_SOMAscan7k_analyte_information_20_06_2023.csv" obtained from ADNI (https://adni.loni.usc.edu).
+- **Processing:** Protein abundance log₂ transformation and inclusion of protein names, subject diagnosis, and sex information. 
 - **Stratification:** Different stratifications were used for boxplot analysis. Based on biological diagnosis (1) A-T- vs A+T+ (based on Aβ/pTau ratio; n = 703), and clinical (established by ADNI based on clinical assessment) diagnosis (2) A-T- CU vs A+T+ MCI (n = 350), (3) A-T- CU vs A+T+ dementia (n = 265).
 - **Input CSVs include:** RID, diagnosis (0 = control, 1 = group of interest), and protein log₂ abundance values per subject.
 
@@ -26,7 +29,10 @@ The following datasets are used as input for the script boxplots.R.
 The following datasets are used as input for the script roc_cross_validation.R and pca.R.
 
 ### Analysis on ADNI database
-- **Original file:** "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
+- **Original files:**
+  1. Proteomics: "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
+  2. Clinical and demographic data: "ADNIMERGE_21Apr2025.csv" obtained from ADNI (https://adni.loni.usc.edu).
+  3. Analyte names: "ADNI_Cruchaga_lab_CSF_SOMAscan7k_analyte_information_20_06_2023.csv" obtained from ADNI (https://adni.loni.usc.edu).
 - **Processing:** Protein abundance log₂ transformation, inclusion of protein names, and subject diagnosis.
 - **Stratification:** Different stratifications were used for ROC performance. Based on biological diagnosis (1) A-T- vs A+T+ (based on Aβ/pTau ratio; n = 703), (2) A-T- vs A+T- (based on AB42, n = 388), (3) AV45- vs AV45+ (n = 488); biological (based on Aβ/pTau ratio) and clinical (established by ADNI based on clinical assessment) diagnosis (4) A-T- CU vs A+T+ MCI (n = 350), (5) A-T- CU vs A+T+ dementia (n = 265); and differential diagnosis (6) A-T- CU vs A-T- MCI (n = 276).
 - **Input CSVs include:** RID, diagnosis (0 = control, 1 = group of interest), and protein log₂ abundance values per subject.
@@ -68,9 +74,12 @@ The following datasets are used as input for the script roc_independent_train_te
 The following datasets are used as input for the script prognosis_analysis.R.
 
 ### Acquisition of signature scores 
-- **Original file:** "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
+- **Original files:**
+  1. Proteomics: "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
+  2. Clinical and demographic data: "ADNIMERGE_21Apr2025.csv" obtained from ADNI (https://adni.loni.usc.edu).
+  3. Analyte names: "ADNI_Cruchaga_lab_CSF_SOMAscan7k_analyte_information_20_06_2023.csv" obtained from ADNI (https://adni.loni.usc.edu).
 - **Processing:** Protein abundance log₂ transformation, inclusion of protein names, and subject diagnosis.
-- **Stratification:** Prior to analysis, the data were split into two separate CSV files (1) A-T- CU vs A+T+ MCI (n = 350), and (2) A+T+ MCI vs A+T+ dementia (n = 413). 
+- **Stratification:** Before analysis, the data were split into two separate CSV files (1) A-T- CU vs A+T+ MCI (n = 350), and (2) A+T+ MCI vs A+T+ dementia (n = 413). 
 - **Input CSV includes:** RID, group (0 = control, 1 = PD), and protein log₂ abundance values per subject.
 
 ### Prognosis analysis
@@ -89,7 +98,7 @@ The following datasets are used as input for the script limma_analysis.R.
 - **Input CSV includes:** RID and protein log₂ abundance values for PPAV11 and core biomarkers per subject.
 
 ## Clinical data
-- **Original file:** "ADNIMERGE_21Apr2025" obtained from ADNI (https://adni.loni.usc.edu).
+- **Original file:** "ADNIMERGE_21Apr2025.csv" obtained from ADNI (https://adni.loni.usc.edu).
 - **Stratification:** Only A+T+ individuals (defined using the Aβ/pTau ratio) were selected (n = 408), together with the clinical variables of interest.
 - **Input CSV includes:** RID, Age, Sex, PTEDUCAT, FDG, PIB, AV45, APOE4, ABETA, TAU, PTAU, pTau/AB, CDRSB, ADAS11, ADAS13, ADASQ4, MMSE, RAVLT_immediate, RAVLT_learning, RAVLT_forgetting, RAVLT_perc_forgetting, LDELTOTAL, DIGITSCOR, TRABSCOR, FAQ, MOCA, EcogPtMem, EcogPtLang, EcogPtVisspat, EcogPtPlan, EcogPtOrgan, EcogPtDivatt, EcogPtTotal, EcogSPMem, EcogSPLang, EcogSPVisspat, EcogSPPlan, EcogSPOrgan, EcogSPDivatt, EcogSPTotal, Ventricles, Hippocampus, WholeBrain, Entorhinal, Fusiform, MidTemp, ICV.
 
