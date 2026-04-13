@@ -7,13 +7,13 @@ The following datasets are used as input for the script boxplots.R.
 ### Analysis on ADNI cohort
 - **Original file:** "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
 - **Processing:** Protein abundance log₂ transformation and inclusion of protein names and clinical data (diagnosis, and sex) from "ADNI_Cruchaga_lab_CSF_SOMAscan7k_analyte_information_20_06_2023.csv" and "ADNIMERGE_21Apr2025.csv". 
-- **Stratification:** Different stratifications were used for boxplot analysis. Based on biological diagnosis (1) A-T- vs A+T+ (based on Aβ/p-Tau ratio; n = 702); and on biological and clinical diagnosis (2) A-T- CU vs A+T+ MCI (n = 350) and (3) A-T- CU vs A+T+ dementia (n = 265).
+- **Stratification:** Different stratifications were used for boxplot analysis. Based on biological diagnosis (1) A-T- vs A+T+ (based on p-Tau/Aβ ratio; n = 702); and on biological and clinical diagnosis (2) A-T- CU vs A+T+ MCI (n = 350) and (3) A-T- CU vs A+T+ dementia (n = 265).
 - **Input CSVs include:** RID, diagnosis (0 = control, 1 = group of interest), and protein log₂ abundance values per subject.
 
 ### Analysis on Bangs et al. (2025) cohort
 - **Original file:** "EmorySubCSF_483CleanDat.xml". Obtained from https://www.synapse.org/ (Synapse ID: syn65461849).
 - **Processing:** Inclusion of subject sex and ethnicity information from "Metadata_EMORY_Subtyping_subjects_ID_2025.xml".
-- **Stratification:** Different stratifications were used for boxplot analysis. Based on biological diagnosis (1) A-T- vs A+T+ (based on Aβ/t-Tau ratio; n = 431); and on biological and clinical (based on MoCA) diagnosis (2) A-T- CU vs A+T+ MCI (n = 242), and (3) A-T- CU vs A+T+ dementia (n = 273).
+- **Stratification:** Different stratifications were used for boxplot analysis. Based on biological diagnosis (1) A-T- vs A+T+ (based on t-Tau/Aβ ratio; n = 431); and on biological and clinical (based on MoCA) diagnosis (2) A-T- CU vs A+T+ MCI (n = 242), and (3) A-T- CU vs A+T+ dementia (n = 273).
 - **Input CSVs include:** ID, diagnosis (0 = control, 1 = group of interest), and protein log₂ abundance values per subject.
 
 ### Analysis on Johnson et al. (2020) cohort
@@ -25,26 +25,26 @@ The following datasets are used as input for the script boxplots.R.
 # ROC curve cross-validation analysis
 The following datasets are used as input for the scripts roc_cross_validation.R and pca.R.
 
-### Analysis on ADNI database
+### Analysis on ADNI cohort
 - **Original file:** "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
 - **Processing:** Protein abundance log₂ transformation and inclusion of protein names and diagnosis from "ADNI_Cruchaga_lab_CSF_SOMAscan7k_analyte_information_20_06_2023.csv" and "ADNIMERGE_21Apr2025.csv". For PCA z-score transformation was performed.
-- **Stratification:** Different stratifications were used for ROC curve performance. Based on biological diagnosis (1) A-T- vs A+T+ (based on Aβ/pTau ratio; n = 702), (2) A-T- vs A+T- (based on Aβ42, n = 388), (3) AV45- vs AV45+ (n = 488); biological (based on Aβ/pTau ratio) and clinical diagnosis (4) A-T- CU vs A+T+ MCI (n = 350), (5) A-T- CU vs A+T+ dementia (n = 265); and differential diagnosis (6) A-T- CU vs A-T- MCI (n = 276).
+- **Stratification:** Different stratifications were used for ROC curve analysis. Based on biological diagnosis (1) A-T- vs A+T+ (based on p-Tau/Aβ ratio; n = 702), (2) A-T- vs A+T- (based on Aβ42, n = 388), (3) AV45- vs AV45+ (n = 488); biological and clinical diagnosis (4) A-T- CU vs A+T+ MCI (n = 350), (5) A-T- CU vs A+T+ dementia (n = 265); and differential diagnosis (6) A-T- CU vs A-T- MCI (n = 276).
 - **Input CSVs include:** RID, diagnosis (0 = control, 1 = group of interest), and protein log₂ abundance values per subject.
 
-### Analysis on PPMI database
+### Analysis on PPMI cohort
 - **Original file:** "ppmi_project_151.xml" obtained from PPMI (https://www.ppmi-info.org/).
 - **Processing:** Conversion of protein names to official gene symbols. For PCA z-score transformation was performed.
-- **Stratification:** Subjects with PD included those classified as sporadic PD or LRRK2-associated PD. Control subjects corresponded to individuals classified as Healthy Controls.
+- **Stratification:** Subjects with PD included those classified as sporadic PD or LRRK2-associated PD, control subjects corresponded to individuals classified as Healthy Controls (n = 798)
 - **Input CSV includes:** ID, group (0 = control, 1 = PD), and protein log₂ abundance values per subject.
 
 ### Analysis on Bangs et al. (2025) cohort
 - **Original file:** "EmorySubCSF_483CleanDat.xml". Obtained from https://www.synapse.org/ (Synapse ID: syn65461849).
 - **Processing:** Conversion of protein names to official gene symbols. For PCA z-score transformation was performed.
-- **Stratification:** Analysis for differential diagnosis A-T- CU vs A-T- MCI (n = 213).
+- **Stratification:** Analysis for differential diagnosis A-T- CU vs A-T- (based on t-Tau/Aβ ratio) MCI (n = 213).
 - **Input CSV includes:** ID, group (0 = control, 1 = group of interest), and protein log₂ abundance values per subject.
 
 # ROC curve independent training testing analysis
-The following datasets are used as input for the script roc_independent_train_test.R and pca.R.
+The following datasets are used as input for the scripts roc_independent_train_test.R and pca.R.
 
 ## Training datasets
 
@@ -60,12 +60,12 @@ The following datasets are used as input for the script roc_independent_train_te
 
 ### Bangs et al. (2025) cohort
 - **Original file:** "EmorySubCSF_483CleanDat.xml". Obtained from https://www.synapse.org/ (Synapse ID: syn65461849).
-- **Stratification:** Different stratifications were used for ROC performance. Based on biological diagnosis (1) A-T- vs A+T+ (based on Aβ/t-Tau ratio; n = 431); and on biological and clinical (based on MoCA) diagnosis (2) A-T- CU vs A+T+ MCI (n = 242), (3) A-T- CU vs A+T+ dementia (n = 273).
+- **Stratification:** Different stratifications were used for ROC curve analysis. Based on biological diagnosis (1) A-T- vs A+T+ (based on t-Tau/Aβ ratio; n = 431); and on biological and clinical (based on MoCA) diagnosis (2) A-T- CU vs A+T+ MCI (n = 242) and (3) A-T- CU vs A+T+ dementia (n = 273).
 - **Processing:** Z-score transformation performed in R.
 
 ### Johnson et al. (2020) cohort
 - **Original file:** "2b.unregressed_Batch-corrected_cleanDat_Cohort2". Obtained from https://www.synapse.org/ (Synapse ID: syn20821165).
-- **Stratification:** Selection of A−T− and A+T+ cognitively impaired subjects.
+- **Stratification:** Selection of A−T− and A+T+ cognitively impaired subjects (n = 65).
 - **Processing:** Z-score transformation performed in R.
 
 - **Input CSVs:** The final input datasets included the two training cohorts and one validation cohort. Each file contained ID, group (0 = control, 1 = group of interest), and protein log₂ z-score abundance values per subject.
@@ -76,13 +76,13 @@ The following datasets are used as input for the script prognosis_analysis.R.
 ### Acquisition of signature scores 
 - **Original file:** "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
 - **Processing:** Protein abundance log₂ transformation and inclusion of protein names and diagnosis from "ADNI_Cruchaga_lab_CSF_SOMAscan7k_analyte_information_20_06_2023.csv" and "ADNIMERGE_21Apr2025.csv". 
-- **Stratification:** Data were split into two separate CSV files (1) A-T- CU vs A+T+ MCI (n = 350), and (2) A+T+ MCI vs A+T+ dementia (n = 413). Biological classification based on Aβ/p-Tau ratio.
+- **Stratification:** Data were split into two separate CSV files (1) A-T- CU vs A+T+ MCI (n = 350), and (2) A+T+ MCI vs A+T+ dementia (n = 413). Biological classification based on p-Tau/Aβ ratio.
 - **Input CSV includes:** RID, group (0 = control, 1 = group of interest), and protein log₂ abundance values per subject.
 
 ### Prognosis analysis
 - **Original files:** Output files obtained from "Acquisition of signature scores"
 - **Processing:** Inclusion of clinical data (age, sex, diagnosis, time of visit, and change in diagnosis) from "ADNIMERGE_21Apr2025.csv". 
-- **Stratification:** Only participants with longitudinal follow-up were included in the analysis. (1) CU individuals to analyze the transition from CU to MCI (n = 143), and (2) A+T+ individuals (based on Aβ/p-Tau ratio) with baseline MCI to evaluate the transition from MCI to dementia (n = 174). 
+- **Stratification:** Only participants with longitudinal follow-up were included in the analysis. (1) CU individuals to analyze the transition from CU to A+T+ (based on p-Tau/Aβ ratio) MCI (n = 143), and (2) A+T+ individuals with baseline MCI to evaluate the transition from MCI to dementia (n = 174). 
 - **Input CSVs include:** RID, time_followup, status, age, sex, and signature scores.
 
 # LIMMA analysis
@@ -90,11 +90,11 @@ The following datasets are used as input for the script limma_analysis.R.
 
 ### Expression proteomics matrix
 - **Original file:** "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
-- **Stratification:** Only A+T+ individuals (based on Aβ/p-Tau ratio) were selected (n = 408).
-- **Processing:** protein abundance log2 transformation and inclusion of protein names.
-- **Input CSV includes:** RID and protein log₂ abundance values for PPAV11 and core biomarkers per subject.
+- **Stratification:** Only A+T+ individuals (based on p-Tau/Aβ ratio) were selected (n = 408).
+- **Processing:** protein abundance log2 transformation and inclusion of protein names from "ADNI_Cruchaga_lab_CSF_SOMAscan7k_analyte_information_20_06_2023.csv".
+- **Input CSV includes:** RID and protein log₂ abundance values for PPAV11 proteins and core AD biomarkers per subject.
 
 ### Clinical dataset
 - **Original file:** "ADNIMERGE_21Apr2025.csv" obtained from ADNI (https://adni.loni.usc.edu).
-- **Stratification:** Only A+T+ individuals (based on Aβ/p-Tau ratio) were selected (n = 408), together with the clinical variables of interest.
-- **Input CSV includes:** RID, Age, Sex, PTEDUCAT, FDG, PIB, AV45, APOE4, ABETA, TAU, PTAU, pTau/AB, CDRSB, ADAS11, ADAS13, ADASQ4, MMSE, RAVLT_immediate, RAVLT_learning, RAVLT_forgetting, RAVLT_perc_forgetting, LDELTOTAL, DIGITSCOR, TRABSCOR, FAQ, MOCA, EcogPtMem, EcogPtLang, EcogPtVisspat, EcogPtPlan, EcogPtOrgan, EcogPtDivatt, EcogPtTotal, EcogSPMem, EcogSPLang, EcogSPVisspat, EcogSPPlan, EcogSPOrgan, EcogSPDivatt, EcogSPTotal, Ventricles, Hippocampus, WholeBrain, Entorhinal, Fusiform, MidTemp, ICV.
+- **Stratification:** Only A+T+ individuals (based on p-Tau/Aβ ratio) were selected (n = 408), together with the clinical variables of interest.
+- **Input CSV includes:** RID, Age, Sex, PTEDUCAT, FDG, PIB, AV45, APOE4, ABETA, TAU, PTAU, CDRSB, ADAS11, ADAS13, ADASQ4, MMSE, RAVLT_immediate, RAVLT_learning, RAVLT_forgetting, RAVLT_perc_forgetting, LDELTOTAL, DIGITSCOR, TRABSCOR, FAQ, MOCA, EcogPtMem, EcogPtLang, EcogPtVisspat, EcogPtPlan, EcogPtOrgan, EcogPtDivatt, EcogPtTotal, EcogSPMem, EcogSPLang, EcogSPVisspat, EcogSPPlan, EcogSPOrgan, EcogSPDivatt, EcogSPTotal, Ventricles, Hippocampus, WholeBrain, Entorhinal, Fusiform, MidTemp, ICV.
