@@ -1,4 +1,5 @@
-# Limma correlation analysis, proteins abundance adjusted by age and sex
+# Limma correlation analysis
+# Proteins abundance adjusted by age and sex
 # Input data described in DATA_README.md
 
 # Import required libraries
