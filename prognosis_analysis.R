@@ -208,7 +208,7 @@ ggsurvplot(
   risk.table = TRUE,
   pval = TRUE,
   conf.int = FALSE,
-  palette = c("#D55E00", "#0072B2"),  # Low in red, High in blue
+  palette = c("#D55E00", "#0072B2"), 
   legend.title = "PPAV11 group",
   legend.labs = c("Low (low values)", "High (high values)"),
   title = "Survival according to PPAV11 signature (Low vs High)",
