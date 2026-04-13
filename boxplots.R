@@ -1,4 +1,4 @@
-# Boxplot and statistical analysis of protein abundance of PPAV11
+# Boxplot and statistical analysis of PPAV11 protein abundances
 # Comparison across groups stratified by sex and ethnicity
 # Input data described in DATA_README.md
 
@@ -7,7 +7,7 @@ library(tidyverse)
 library(ggpubr)
 library(rstatix)
 
-# Load and prepare datasets
+# Load and prepare dataset
 data <- read.csv("Path/to/file.csv")
 data <- data %>%
   mutate(
