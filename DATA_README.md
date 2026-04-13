@@ -4,7 +4,7 @@ This file describes how the proteomic and clinical datasets were acquired, proce
 # Boxplot analysis 
 The following datasets are used as input for the script boxplots.R.
 
-### ADNI cohort
+### Analysis on ADNI cohort
 - **Original files:**
   1. Proteomics: "CruchagaLab_CSF_SOMAscan7k_Protein_matrix_postQC_20230620-2.csv" obtained from ADNI (https://adni.loni.usc.edu).
   2. Clinical and demographic data: "ADNIMERGE_21Apr2025.csv" obtained from ADNI (https://adni.loni.usc.edu).
@@ -13,7 +13,7 @@ The following datasets are used as input for the script boxplots.R.
 - **Stratification:** Different stratifications were used for boxplot analysis. Based on biological diagnosis (1) A-T- vs A+T+ (based on Aβ/pTau ratio; n = 702); and on biological and clinical (established by ADNI based on clinical assessment) diagnosis (2) A-T- CU vs A+T+ MCI (n = 350) and (3) A-T- CU vs A+T+ dementia (n = 265).
 - **Input CSVs include:** RID, diagnosis (0 = control, 1 = group of interest), and protein log₂ abundance values per subject.
 
-### Bangs et al. (2025) cohort
+### Analysis on Bangs et al. (2025) cohort
 - **Original files:**
   1. Proteomics: "EmorySubCSF_483CleanDat.xml". Obtained from https://www.synapse.org/ (Synapse ID: syn65461849).
   2. Clinical and demographic data: "Metadata_EMORY_Subtyping_subjects_ID_2025.xml". Obtained from https://www.synapse.org/ (Synapse ID: syn65461849).
@@ -21,7 +21,7 @@ The following datasets are used as input for the script boxplots.R.
 - **Stratification:** Different stratifications were used for boxplot analysis. Based on biological diagnosis (1) A-T- vs A+T+ (based on Aβ/tTau ratio; n = 431); biological (based on Aβ/tTau ratio) and clinical (based on MoCA) diagnosis (2) A-T- CU vs A+T+ MCI (n = 242), and (3) A-T- CU vs A+T+ dementia (n = 273).
 - **Input CSVs include:** ID, diagnosis (0 = control, 1 = group of interest), and protein log₂ abundance values per subject.
 
-### Johnson et al. (2020) cohort
+### Analysis on Johnson et al. (2020) cohort
 - **Original files:**
   1. Proteomics: "2b.unregressed_Batch-corrected_cleanDat_Cohort2.csv". Obtained from https://www.synapse.org/ (Synapse ID: syn20821165).
   2. Clinical and demographic data: "0. traits.csv". Obtained from https://www.synapse.org/ (Synapse ID: syn20821165).
