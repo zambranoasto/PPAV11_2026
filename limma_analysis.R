@@ -65,16 +65,16 @@ all_results <- bind_rows(limma_results)
 
 # Create  matrix for heatmap visualization
 beta_matrix <- all_results %>%
-  select(Protein, Trait, logFC) %>%
-  pivot_wider(names_from = Trait, values_from = logFC) %>%
+  select(Protein, Trait, logabundance) %>%
+  pivot_wider(names_from = Trait, values_from = logabundance) %>%
   column_to_rownames("Protein")
 
 # Create label matrix for clinical variables
 label_matrix <- all_results %>%
-  select(Protein, Trait, logFC, adj.P.Val) %>%
+  select(Protein, Trait, logabundance, adj.P.Val) %>%
   mutate(label = ifelse(adj.P.Val < 0.05,
-                        paste0(sprintf("%.4f", logFC), "*"),
-                        sprintf("%.4f", logFC))) %>%
+                        paste0(sprintf("%.4f", logabundance), "*"),
+                        sprintf("%.4f", logabundance))) %>%
   select(Protein, Trait, label) %>%
   pivot_wider(names_from = Trait, values_from = label) %>%
   column_to_rownames("Protein")
