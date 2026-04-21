@@ -75,11 +75,10 @@ calculate_roc_cv <- function(genes, signature_name, k = 5, rep = 10) {
       )
 
       if (is.null(model)) next
-      probs_control <- predict(model, newdata = test, type = "response")
-      probs <- 1 - probs_control
+      probs <- predict(model, newdata = test, type = "response")
       roc_cv <- roc(test$Group, probs,
                     levels = c("Control", "Case"),
-                    direction = ">",
+                    direction = "<",
                     quiet = TRUE)
       if (is.null(roc_cv)) next
       aucs <- c(aucs, auc(roc_cv))
