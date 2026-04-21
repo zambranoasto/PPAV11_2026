@@ -49,8 +49,7 @@ calculate_scores_per_subject <- function(signature_data, k = 5, rep = 10) {
       if (length(unique(test$Group)) < 2) next
       model <- tryCatch(glm(Group ~ ., data = train, family = "binomial"), error = function(e) NULL)
       if (is.null(model)) next
-      probs_control <- predict(model, newdata = test, type = "response")
-      probs <- 1 - probs_control  # Probability of "Case"
+      probs <- predict(model, newdata = test, type = "response")
       scores[[length(scores) + 1]] <- tibble(
         RID = test$RID,
         Group = test$Group,
@@ -102,8 +101,8 @@ signatures <- c("score_PPAV11", "score_Bader", "score_Wang", "score_Sathe",
                 "score_Hou", "score_Yun", "pTauAB", "tTauAB", "ABETA", "TAU", "PTAU")
 risk_logic <- tibble(
   signature = signatures,
-  clinical_risk = c("Low", "Low", "Low", "Low", "Low", "Low", "Low", "Low", "Low", "Low",
-                    "Low", "Low", "Low", "Low", "High", "High", "Low", "High", "High")
+  clinical_risk = c("High", "High", "High", "High", "High", "High", "High", "High", "High", "High",
+                    "High", "High", "High", "High", "High", "High", "Low", "High", "High")
 )
 
 # Load and prepare dataset
@@ -118,7 +117,7 @@ dat <- dat %>%
   risk <- risk_logic %>% filter(signature == var) %>% pull(clinical_risk)
   dat_bin <- dat %>%
     mutate(signature_bin = ifelse(.data[[var]] <= cutoff, "Low", "High")) %>%
-    mutate(signature_bin = factor(signature_bin, levels = if (risk == "Low") c("High", "Low") else c("Low", "High"))) %>%
+    mutate(signature_bin = factor(signature_bin, levels = if (risk == "High") c("Low", "High") else c("High", "Low"))) %>%
     drop_na(signature_bin, time_followup, status, age, sex)
   if (nrow(dat_bin) == 0) return(NULL)
   fit <- coxph(Surv(time_followup, status) ~ signature_bin + age + sex, data = dat_bin)
@@ -127,18 +126,12 @@ dat <- dat %>%
   lower <- s$conf.int[1, "lower .95"]
   upper <- s$conf.int[1, "upper .95"]
   pval <- s$coefficients[1, "Pr(>|z|)"]
-  interpretation <- if (risk == "Low") {
-    paste("Risk ↑ if", var, "is low")
-  } else {
-    paste("Risk ↑ if", var, "is high")
-  }
   
   # Print results to console
   cat("\n==============================\n")
   cat("Signature:", var, "\n")
   cat("HR:", round(hr, 3), " [", round(lower, 3), "-", round(upper, 3), "]\n")
   cat("p-value:", signif(pval, 3), "\n")
-  cat("Clinical interpretation:", interpretation, "\n")
   cat("==============================\n")
   data.frame(
     signature = var,
@@ -146,7 +139,6 @@ dat <- dat %>%
     lower_CI = lower,
     upper_CI = upper,
     p_value = pval,
-    interpretation = interpretation,
     clinical_risk = risk
   )
 }
@@ -168,8 +160,7 @@ ggplot(clinical_results, aes(x = signature, y = HR_risk_group_vs_reference, colo
   theme_minimal(base_size = 14) +
   scale_color_manual(values = c("Low" = "darkred", "High" = "darkblue")) +
   labs(
-    title = "Hazard Ratio per signature according to clinical logic",
-    subtitle = "HR > 1 indicates higher risk in clinically relevant group",
+    title = "Name",
     y = "Hazard Ratio",
     x = "Signature",
     color = "Clinical risk"
