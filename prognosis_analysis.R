@@ -1,5 +1,6 @@
 # Prognosis analysis of CSF proteomic biomarker signatures (Hazard models)
 # Input data described in DATA_README.md
+# Output: Figures  in the R console consisting of a forest plot comparing HR across all signatures; and  a Kaplan-Meier survival curve for a specific signature comparing high vs. low progression probability groups. Statistical metrics—including HR, CI, and p-values in the console.
 
 # Acquire signature scores
 # Import required libraries
