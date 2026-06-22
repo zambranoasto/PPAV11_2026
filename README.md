@@ -24,9 +24,13 @@ The proteomics datasets used in this study are available at:
 6. Tao et al. (2024): Supplemental Information https://doi.org/10.1016/j.xinn.2023.100544 
 
 ## Instructions
-The code was tested using R (v4.3.0) on Windows, but it should be compatible with later versions of R and other operating systems. 
+### Prerequisites 
+The code was tested using R (v4.3.0) on Windows, but it should be compatible with later versions of R and other operating systems. Non-specific hardware is required to run these scripts; a conventional laptop is sufficient.
 
-Before running the scripts, the working directory containing the input data must be specified at the beginning of each R script. Input datasets links and processing steps are described in DATA_README.md.
+The following packages need to be installed before running the analyses. The code was tested using these specific versions, but later versions should be compatible. Installation typically takes a few seconds per package on a standard machine. tidyverse (v2.0.0), ggpubr (v0.6.0), rstatix (v0.7.2), clusterProfiler (v4.14.6), org.Hs.eg.db (v3.20.0), ReactomePA (v1.50.0), circlize (v0.4.16), RColorBrewer (v1.1.3), limma (v3.62.2), pheatmap (v1.0.12), viridis (v0.6.5), dplyr (v1.1.4), ggplot2 (v3.3.3), ggfortify (v0.4.17), pROC (v1.18.5), caret (v7.0.1), tibble (v3.2.1), readr (v2.1.5), survival (v3.7.0), tidyr (v1.3.1), GOplot (v1.0.2).
+
+### Setup and execution
+Before running the scripts, the working directory containing the input data must be specified at the beginning of each R script. Input dataset links and processing steps are described in DATA_README.md.
 
 The scripts can be run independently, but are intended to be executed in the following order:
 1. boxplots.R
