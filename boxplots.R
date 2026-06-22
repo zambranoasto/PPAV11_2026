@@ -1,6 +1,7 @@
 # Boxplot and statistical analysis of PPAV11 protein abundances
 # Comparison across groups stratified by sex and ethnicity
 # Input data described in DATA_README.md
+# Output: Figures in the R console consisting of box and whisker plots of protein abundance per protein, with participants stratified by diagnosis, sex, and race/ethnicity.
 
 # Import required libraries
 library(tidyverse)
