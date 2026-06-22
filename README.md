@@ -41,3 +41,4 @@ The scripts can be run independently, but are intended to be executed in the fol
 6. limma_analysis.R
 7. enrichment_analysis.R
 
+Note: The expected run time for each analysis ranges from a few seconds to less than 4 minutes on a conventional laptop.
