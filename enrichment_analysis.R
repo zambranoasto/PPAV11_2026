@@ -1,4 +1,5 @@
 # Functional enrichment and pathway analysis of PPAV11 using GO, KEGG, and REACTOME databases
+# Figures in the R console consisting of chord diagrams that illustrate the associations between proteins and enriched terms (separate plots for Reactome/KEGG and Gene Ontology).
 
 # Import required libraries
 library(clusterProfiler)
