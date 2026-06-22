@@ -1,5 +1,6 @@
 # Principal component analysis (PCA) of PPAV11 
 # Input data described in DATA_README.md
+# Outputs: Figure generated in the R console consisting of the PCA plot and a summary of the MANOVA analysis (including Df, Pillai's trace, approximate F, and p-value).
 
 # Import required libraries
 library(ggplot2)
