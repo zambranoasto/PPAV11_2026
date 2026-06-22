@@ -1,6 +1,7 @@
 # Limma correlation analysis
-# Proteins abundance adjusted by age and sex
+# Protein abundances adjusted by age and sex
 # Input data described in DATA_README.md
+# Output: Figure in the R console consisting of a heatmap illustrating the correlations of proteins and clinical measures
 
 # Import required libraries
 library(tidyverse)
