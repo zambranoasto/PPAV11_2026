@@ -13,7 +13,7 @@ library(readr)
 
 # Load and prepare dataset
 data <- read_csv("Path/to/file.csv",
-                 col_types = cols())
+                 header = TRUE, stringsAsFactors = FALSE)
 colnames(data) <- trimws(colnames(data))
 data$Group <- factor(data$Group)
 levels(data$Group) <- c("0", "1")  # Positive level = "Case"
@@ -36,6 +36,10 @@ signatures <- list(
   Yun  = c("YWHAZ", "EPHA5", "CABIN1", "SST", "PPIA", "CNTN5", "GFAP", "POMC", "RSPO1", "TPT1", "MINDY2", "PRDX6")
 )
 
+# Filter genes present in dataset
+filter_genes <- function(signature) intersect(signature, colnames(data))
+signatures <- lapply(signature_list, filter_genes)
+
 # Define function to calculate scores 
 calculate_scores_per_subject <- function(signature_data, k = 5, rep = 10) {
   scores <- list()
@@ -48,11 +52,19 @@ calculate_scores_per_subject <- function(signature_data, k = 5, rep = 10) {
       test <- signature_data[test_idx, ]
       
       if (length(unique(test$Group)) < 2) next
-      model <- tryCatch(glm(Group ~ ., data = train, family = "binomial"), error = function(e) NULL)
+      test_rids <- test$RID
+      train_model_data <- train %>% select(-RID)
+      test_model_data <- test %>% select(-RID)
+      
+      model <- tryCatch(
+        glm(Group ~ ., data = train_model_data, family = "binomial"), 
+        error = function(e) NULL
+      )
+      
       if (is.null(model)) next
-      probs <- predict(model, newdata = test, type = "response")
+      probs <- predict(model, newdata = test_model_data, type = "response")
       scores[[length(scores) + 1]] <- tibble(
-        RID = test$RID,
+        RID = test_rids,
         Group = test$Group,
         Probability = probs
       )
@@ -63,24 +75,29 @@ calculate_scores_per_subject <- function(signature_data, k = 5, rep = 10) {
 
 signature_results <- list()
 
-for (signature_name in names(signatures)) {
-  genes <- intersect(signatures[[signature_name]], colnames(data))
+  for (signature_name in names(signatures)) {
+  genes <- signatures[[signature_name]]
   
   if (length(genes) == 0) {
     message("Signature ", signature_name, " has no genes in the dataset.")
     next
   }
-  signature_data <- data %>%
+    
+   signature_data <- data %>%
     select(RID, Group, all_of(genes)) %>%
     na.omit()
-  test_predictions <- calculate_scores_per_subject(signature_data)
-  average_score <- test_predictions %>%
+  
+  print(paste("Processing signature:", signature_name))
+    test_predictions <- calculate_scores_per_subject(signature_data)
+    if (is.null(test_predictions) || nrow(test_predictions) == 0) next
+    average_score <- test_predictions %>%
     group_by(RID, Group) %>%
     summarise(!!paste0("score_", signature_name) := mean(Probability), .groups = "drop")
   signature_results[[signature_name]] <- average_score
 }
 
 # Combine scores into a single dataframe
+if (length(signature_results) > 0) {
 final_scores <- reduce(signature_results, full_join, by = c("RID", "Group"))
 
 # Save combined scores to CSV
